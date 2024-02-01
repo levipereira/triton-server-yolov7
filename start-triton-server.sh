@@ -14,6 +14,13 @@
 # 1. Convert YOLOv7 ONNX model to TensorRT engine with FP16 precision.
 # 2. Convert YOLOv7 Quantized and Aware Training (QAT) ONNX model to TensorRT engine with INT8 precision.
 # 3. Start Triton Inference Server with the converted models.
+# Check if ONNX model files exist
+if [[ ! -f "./models_onnx/yolov7/yolov7_end2end.onnx" || ! -f "./models_onnx/yolov7_qat/yolov7_qat_end2end.onnx" ]]; then
+    echo "YOLOv7 ONNX model files not found. Attempting to download..."
+    cd ./models_onnx
+    bash ./download_models.sh
+    cd ../
+fi
 
 # Check if ONNX model files exist
 if [[ ! -f "./models_onnx/yolov7/yolov7_end2end.onnx" ]]; then
